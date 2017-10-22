@@ -46,4 +46,8 @@ for step in range(2001):
         feed_dict={X: x_batch, Y: y_batch}
     )
     if step % 10 == 0:
-        print(step,)
+        print(step, "Cost: ", cost_val,
+                    "\nPrediction:\n", hy_val)
+
+coord.request_stop()
+coord.join(threads)
