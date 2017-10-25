@@ -28,3 +28,25 @@ with tf.Session() as sess:
         if step % 200 == 0:
             print(step, sess.run(cost, feed_dict={X: x_data, Y: y_data}))
 
+    print('------------')
+
+    # testing & one-hot encoding
+    a = sess.run(hypothesis, feed_dict={X: [[1, 11, 7, 9]]})
+    print(a, sess.run(tf.argmax(a, 1)))
+
+    print('------------')
+
+    b = sess.run(hypothesis, feed_dict={X: [[1, 3, 4, 3]]})
+    print(b, sess.run(tf.argmax(b, 1)))
+
+    print('------------')
+
+    c = sess.run(hypothesis, feed_dict={X: [[1, 1, 0, 1]]})
+    print(c, sess.run(tf.argmax(c, 1)))
+
+    print('------------')
+
+    all = sess.run(hypothesis, feed_dict={
+        X: [[1, 11, 7, 9], [1, 3, 4, 3], [1, 1, 0, 1]]
+    })
+    print(all, sess.run(tf.argmax(all, 1)))
