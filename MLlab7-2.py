@@ -50,7 +50,7 @@ with tf.Session() as sess:
         print('Epoch: ', '%04d' % (epoch + 1), 'cost = ', '{:.9f}'.format(avg_cost))
     print("Accuracy: ", accuracy.eval(session=sess,
                                       feed_dict={X: mnist.test.images, Y: mnist.test.labels}))
-    print("Learning Finished!")
+    print("::: Learning Finished! :::")
 
     # test the model using test sets
     print("Accuracy: ", accuracy.eval(session=sess, feed_dict={
@@ -58,14 +58,16 @@ with tf.Session() as sess:
     }))
 
     # get one and predict
-    r = random.randint(0, mnist.test.num_examples - 1)
-    print("Label: ", sess.run(tf.argmax(mnist.test.labels[r:r + 1], 1)))
-    print("Prediction: ", sess.run(
-        tf.argmax(hypothesis, 1), feed_dict={X: mnist.test.images[r:r + 1]}
-    ))
-    plt.imshow(
-        mnist.test.images[r:r + 1].reshape(28, 28),
-        cmap='Greys',
-        interpolation='nearest'
-    )
-    plt.show()
+    for step in range(5):
+        r = random.randint(0, mnist.test.num_examples - 1)
+        print("Label: ", sess.run(tf.argmax(mnist.test.labels[r:r + 1], 1)))
+        print("Prediction: ", sess.run(
+            tf.argmax(hypothesis, 1), feed_dict={X: mnist.test.images[r:r + 1]}
+        ), "\n")
+        plt.imshow(
+            mnist.test.images[r:r + 1].reshape(28, 28),
+            cmap='Greys',
+            interpolation='nearest'
+        )
+        plt.show()
+
